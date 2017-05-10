@@ -27,6 +27,8 @@ class PostsController extends Controller{
     }
     public function show()
     {
+        //crée le controlleur des commentaires
+        $controlComment = new \App\Controller\CommentsController();
         // génere le contenu des pages articles
         $post = $this->Posts->find($_GET['id']);
         // test si l'article existe
@@ -36,7 +38,7 @@ class PostsController extends Controller{
         // défini le titre de la page
         App::getInstance()->setTitle($post->title);
         $categoriesList = $this->Categories->all();
-        $this-> render('posts.show', compact("post","categoriesList"));
+        $this-> render('posts.show', compact("post","categoriesList","controlComment"));
     }
     public function category()
     {

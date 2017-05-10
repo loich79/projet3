@@ -14,5 +14,8 @@ namespace App\Model\Entity;
  * @author loich
  */
 class CommentsEntity extends Entity {
-    //put your code here
+    public function arrayChild($id)
+    {
+        return $name = 'ChildOfComment'.$id;
+    }
 }
