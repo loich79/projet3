@@ -8,6 +8,12 @@
 <form method="POST">
     <?= $form->input('title', 'Titre de l\'article'); ?>
     <?= $form->input('content', 'contenu',['type' => 'textarea']) ?>
+    <script>tinymce.init({ selector:'textarea', language: 'fr_FR' });</script>
+    <!--<script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>-->
     <?= $form-> select('category_id', 'Catégories', $categories); ?>
     <?= $form->submit('Sauvegarder') ?>
 </form>

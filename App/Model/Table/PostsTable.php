@@ -15,7 +15,7 @@ class PostsTable extends Table{
      * @param type $nbArticles (par defaut = 5)
      * @return array
      */
-    public function last($nbArticles = 10)
+    public function last($nbArticles = 25)
     {
         return $this->query('SELECT posts.id, posts.title,'
                 . 'posts.content, categories.title AS categorie, posts.category_id,'
@@ -49,7 +49,7 @@ class PostsTable extends Table{
      * @param type $nbArticles int (par defaut = 5)
      * @return type array
      */
-    public function lastByCategory($idCategorie, $nbArticles = 10)
+    public function lastByCategory($idCategorie, $nbArticles = 25)
     {
         return $this->query('SELECT posts.id, posts.title, '
                 . 'posts.content, categories.title AS categorie, '
