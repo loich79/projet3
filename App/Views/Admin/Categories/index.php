@@ -1,17 +1,23 @@
-
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <h1>Administrer les categories</h1>      
     </div>
-    <div class="col-md-4">
-        <a href="index.php?page=admin.posts.index" class="btn btn-info">Administrer les articles</a> 
+    <div class="col-md-3">
+        <a href="index.php?page=admin.posts.index" class="btn btn-info center-block">Administrer les articles</a>           
     </div>
+    <div class="col-md-3">
+        <a href="index.php?page=admin.comments.index" class="btn btn-info center-block">Modérer les commentaires </a>
+        <?php if($countCommentsFlagged != 0) : ?>
+        <p class=" alert alert-danger text-center">Commentaires signalés : <?= $countCommentsFlagged ?></p>
+        <?php endif; ?>
+    </div>
+    
  </div>
 <p>
     <a href="?page=admin.categories.add" class="btn btn-success">Ajouter</a>
 </p>
 
-<table class="table bloc">
+<table class="table table-striped">
     <thead>
         <tr>
             <td>ID</td>

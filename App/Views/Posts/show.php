@@ -7,6 +7,7 @@
             <p><?= $post->content ?></p>
         </div>
         <?php 
+            //affiche les commentaires
             $controlComment->show($post->id);
         ?>
     </div>

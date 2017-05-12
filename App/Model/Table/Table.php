@@ -57,7 +57,7 @@ class Table {
      */
     public function all()
     {
-        return $this->query('SELECT * FROM '. $this->table);
+        return $this->query("SELECT * FROM  {$this->table}  ORDER by id");
     }
     /**
      * excute une requete (préparée si un tableau d'attribut est passé en parametres)

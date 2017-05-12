@@ -12,11 +12,15 @@ function showComment($comment, $compteur, $postId)
 { ?>
     <div class="panel panel-default">
     <div class="panel-heading">
-    <p><?= $comment->authorname ?> - <?= $comment->comment_date  ?> - ID : <?= $comment->id ?></p>
+    <p>
+        <?= $comment->authorname ?> - <?= $comment->comment_date  ?> - ID : <?= $comment->id ?> 
+        <a href="index.php?page=posts.flag&id=<?= $comment->id ?>" class="pull-right">signaler</a>
+    </p>
     </div>
     <div class="panel-body">
     <p>niveau du commentaire : <?=$comment->level ?></p>
     <p>id commentaire parent : <?=$comment->parent_id ?></p>
+    <p>Commentaire signalé : <?= $comment->flag ?> fois</p>
     <p><?=$comment->comment ?></p>               
     </div>
     

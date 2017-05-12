@@ -10,29 +10,45 @@ namespace App\Controller;
 
 /**
  * Description of CommentsController
- *
+ * controleur des commentaires
  * @author loich
  */
 class CommentsController extends Controller {
+    /**
+     * contructeur pour le controleur des commentaires
+     */
     public function __construct() {
+        // appelle le contructeur du parent Controller
         parent::__construct();
+        // génère le modele pour l'interface avec la table comments
         $this->loadModel('Comments');        
-    }
+    }/**
+     * redéfinition de la fonction render qui génère l'affichage
+     * @param type $view string
+     * @param type $variables array
+     */
     protected function render($view, $variables = [])
     {
         extract($variables);
         require $this->viewPath . str_replace('.', '/', $view) . '.php';
     }
-    // fonction permettant de creer le nom du tableau contenant les enfants
+    /**
+     * fonction permettant de creer le nom du tableau contenant les enfants
+     * @param type $id int
+     * @return type int
+     */
     protected function arrayChild($id)
     {
         return $name = 'ChildOfComment'.$id;
     }
-    public function show($post_id) 
+    /**
+     * génère l'affichage des commentaire en fonction de l'id de l'article
+     * @param type $post_id
+     */
+    public function show($postId) 
     {
         // initialise la variable message pour qu'elle n'affiche rien si il n'y a pas d'erreur ou d'information à afficher
         $message = '';
-        $postId = $post_id;
         //ajout du commentaire dans la base de données
         if(!empty($_POST)) {
             $res = $this->Comments->create(array(
@@ -101,7 +117,23 @@ class CommentsController extends Controller {
         foreach ($arrayOfUsedParentId as $parent_id) : 
             $arrayOfArrayOfChild[$this->arrayChild($parent_id)] = ${$this->arrayChild($parent_id)};
         endforeach;
-        
         $this->render('posts.comments', compact("message", "comments", "arrayOfArrayOfChild", "postId"));
+    }
+    /**
+     * gère la fonction de signalement
+     * incrémente le champ flag pour le commentaire concerné 
+     */
+    public function flag()
+    {
+        // recupère le commentaires qui a été signalé
+        $comment = $this->Comments->find($_GET['id']);
+        // crée la nouvelle valeur du champ flag (+1)
+        $flag = $comment->flag +1; 
+        // met a jour le commentaire dans la table comments
+        $this->Comments->update($_GET['id'], array(
+            "flag" => $flag
+        ));
+        // redirige vers la page de l'article
+        header('location:index.php?page=posts.show&id='.$comment->post_id);
     }
 }

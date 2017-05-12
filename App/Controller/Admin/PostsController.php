@@ -9,21 +9,23 @@ use \App;
  *
  * @author loich
  */
-class PostsController extends AppController{
+class PostsController extends AdminController{
     
    public function __construct() {
        parent::__construct();
        $this->loadModel('Posts');
        $this->loadModel('Categories');
+       $this->loadModel("Comments");
    }
    /**
     * controleur pour la page index de l'administration des articles
     */
    public function index()
    { 
-    App::getInstance()->setTitle('Articles | Admin');
-    $posts = $this->Posts->all();
-    $this->render('admin.posts.index', compact('posts'));
+        $countCommentsFlagged = $this->Comments->countFlagged();
+        App::getInstance()->setTitle('Articles | Admin');
+        $posts = $this->Posts->all();
+        $this->render('admin.posts.index', compact('posts', 'countCommentsFlagged'));
    }
    /**
     * controleur pour la page edit de l'administration des articles

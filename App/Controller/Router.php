@@ -4,10 +4,14 @@ namespace App\Controller;
 
 /**
  * Description of Router
- *
+ * gerer l'appel des controlleurs et de leurs fonctions selon la page demandée
  * @author loich
  */
 class Router {
+    /**
+     * gerer l'appel des controlleurs et de leurs fonctions selon la page demandée
+     * @param type $page string
+     */
     public static function route($page)
     {
         if ($page === 'home'){
@@ -49,6 +53,18 @@ class Router {
         } elseif ($page === 'admin.categories.delete') {
             $controller = new \App\Controller\Admin\CategoriesController();
             $controller->delete();
+        } elseif ($page === 'posts.flag') {
+            $controller = new \App\Controller\CommentsController();
+            $controller->flag();
+        } elseif ($page === 'admin.comments.index') {
+            $controller = new \App\Controller\Admin\CommentsController();
+            $controller->index();
+        } elseif ($page === 'admin.comments.delete') {
+            $controller = new \App\Controller\Admin\CommentsController();
+            $controller->delete();
+        }  elseif ($page === 'admin.comments.unflag') {
+            $controller = new \App\Controller\Admin\CommentsController();
+            $controller->unflag();
         }
     }
 }

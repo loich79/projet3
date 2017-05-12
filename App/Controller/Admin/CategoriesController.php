@@ -9,20 +9,22 @@ use \App;
  *
  * @author loich
  */
-class CategoriesController  extends AppController{
+class CategoriesController  extends AdminController{
     
    public function __construct() {
        parent::__construct();
        $this->loadModel('Categories');
+       $this->loadModel("Comments");
    }
    /**
     * controleur pour la page index de l'administration des articles
     */
    public function index()
    { 
-    App::getInstance()->setTitle('Categories | Admin');
-    $categories = $this->Categories->all();
-    $this->render('admin.categories.index', compact('categories'));
+        $countCommentsFlagged = $this->Comments->countFlagged();
+        App::getInstance()->setTitle('Categories | Admin');
+        $categories = $this->Categories->all();
+        $this->render('admin.categories.index', compact('categories', 'countCommentsFlagged'));
    }
    /**
     * controleur pour la page edit de l'administration des articles
@@ -34,7 +36,7 @@ class CategoriesController  extends AppController{
         if(!empty($_POST)) {
             $res = $this->Categories->update($_GET['id'],
                     array(
-                        'title' => $_POST['title'],
+                        'title' => $_POST['title']
                     ));
         }
 
