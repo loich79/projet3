@@ -14,20 +14,24 @@ class CommentsController extends AdminController{
      * contructeur pour le controlleur de l'administration des commentaires
      */
     public function __construct() {
-        // appele le constructeur de la classe parent AppController
+        // appelle le constructeur de la classe parent AdminController
         parent::__construct();
         // génere le modèle faisant l'interface avec la table comments
         $this->loadModel("Comments");
     }
     /**
-     * génere l'affichage de la page de modération des commentaires
+     * génère l'affichage de la page de modération des commentaires
      */
     public function index()
     {
         //récupère le nombres de commentaires signalés et le stocke dans une variable pour etre transmis à l'afficheur
         $countCommentsFlagged = $this->Comments->countFlagged();
-        // modifie le titre de la page
+        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
         App::getInstance()->setTitle('Commentaires | Admin');
+        App::getInstance()->setPageTitle('Adminstration');
+        App::getInstance()->setPageSubtitle('Commentaires');
+        // modifie le variable stockant le nombre de commentaires signalés
+        App::getInstance()->setNbCommentsFlagged($countCommentsFlagged);
         // récupère tous les commentaires et les stocke dans un tableau pour être transmis à l'afficheur
         $comments = $this->Comments->all();
         // génere l'affichage de la page de modération des commentaires
@@ -38,6 +42,7 @@ class CommentsController extends AdminController{
      */
     public function delete()
     {
+        //initialise la variable indiquant a l'afficheur si il y a une erreur
         $error = false;
         // remplit le tableau de commentaires a supprimer
         if(!empty($_POST )) {
@@ -45,24 +50,24 @@ class CommentsController extends AdminController{
             $commentSelected = $this->Comments->find($_POST['id']);
             // ajoute le commentaire initial au tableau de commentaire à supprimer
             $CommentsToDelete[] = $commentSelected;
-            // teste si le level est inférieur ou égal à 3 
-            if($commentSelected->level <= 3) {
+            // teste si le level est inférieur ou égal à niveau max de reponses autorisé
+            if($commentSelected->level <= MAX_COMMENT_LEVEL) {
                 // recherche les enfants de $commentSelected
                 $CommentsChild1 = $this->Comments->findChild($commentSelected->id);
                 //parcours le tableau des enfants de $commentSelected
                 foreach ($CommentsChild1 as $child1) {
                     // ajoute le commentaire enfant $child1 au tableau de commentaire à supprimer
                     $CommentsToDelete[] = $child1;
-                    // teste si le level $child1 est inférieur ou égal à 3 
-                    if($child1->level <= 3) {
+                    // teste si le level $child1 est inférieur ou égal à niveau max de reponses autorisé
+                    if($child1->level <= MAX_COMMENT_LEVEL) {
                         // recherche les enfants de $child1
                         $CommentsChild2 = $this->Comments->findChild($child1->id);
                         //parcours le tableau des enfants de $child1
                         foreach ($CommentsChild2 as $child2) {
                             // ajoute le commentaire enfant $child2 au tableau de commentaire à supprimer
                             $CommentsToDelete[] = $child2;
-                            // teste si le level de $child2 est inférieur ou égal à 3 
-                            if($child2->level <= 3) {
+                            // teste si le level de $child2 est inférieur ou égal à niveau max de reponses autorisé
+                            if($child2->level <= MAX_COMMENT_LEVEL) {
                                 // recherche les enfants de $child2
                                 $CommentsChild3 = $this->Comments->findChild($child2->id);
                                 //parcours le tableau des enfants de $child2

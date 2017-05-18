@@ -20,10 +20,25 @@ class App {
      */
     private $title = "Jean Forteroche";
     /**
+     * stocke le titre de la page pour le bandeau
+     * @var type string
+     */
+    private $pageTitle = "Jean Forteroche";
+    /**
+     * stocke le sous-titre de la page pour le bandeau
+     * @var type string
+     */
+    private $pageSubtitle = "Acteur et écrivain";
+    /**
      * stocke la connexion a la bdd
      * @var type PDO
      */
     private $db;
+    /**
+     * stocke le nombre de commentaires signalés
+     * @var type string
+     */
+    private $nbCommentsFlagged;
     /**
      * renvoie l'instance de l'objet app (singleton)
      * @return type objet de type app
@@ -45,12 +60,60 @@ class App {
         return $this->title;
     }
     /**
-     * setter pour le titre
-     * @param type $titre string
+     * getter pour le titre du bandeau
+     * @return type string
      */
-    public function setTitle($titre)
+    public function getPageTitle()
     {
-        $this->title = $titre . ' | ' . $this->title;
+        return $this->pageTitle;
+    }
+    /**
+     * getter pour le sous-titre du bandeau
+     * @return type string
+     */
+    public function getPageSubtitle()
+    {
+        return $this->pageSubtitle;
+    }
+    /**
+     * getter pour le nombre de commentaires signalés
+     * @return type string
+     */
+    public function getNbCommentsFlagged()
+    {
+        return $this->nbCommentsFlagged;
+    }
+    /**
+     * setter pour le titre
+     * @param type $title string
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title . ' | ' . $this->title;
+    }
+    /**
+     * setter pour le titre du bandeau
+     * @param type $pageTitle string
+     */
+    public function setPageTitle($pageTitle)
+    {
+        $this->pageTitle = $pageTitle;
+    }
+    /**
+     * setter pour le soustitre du bandeau
+     * @param type $pageSubtitle string
+     */
+    public function setPageSubtitle($pageSubtitle)
+    {
+        $this->pageSubtitle = $pageSubtitle;
+    }
+    /**
+     * setter pour le nombre de commentaires signalés
+     * @param type $title string
+     */
+    public function setNbCommentsFlagged($nbCommentsFlagged)
+    {
+        $this->nbCommentsFlagged = $nbCommentsFlagged;
     }
     /**
      * renvoie l'instance de l'objet PDO et le crée si nécessaire
@@ -59,7 +122,7 @@ class App {
     public function getDb()
     {
         if($this->db === null ){
-            $config = Config::getInstance(ROOT.'/config/config.php');
+            $config = Config::getInstance(ROOT.'/Config/config.php');
             $this->db = new MySqlDatabase($config->get('dbName'), $config->get('dbUser'), $config->get('dbPwd'), $config->get('dbHost'));  
         }
         return $this->db;
@@ -82,8 +145,6 @@ class App {
         session_start();
         require ROOT.'/App/Autoloader.php';
         app\Autoloader::register();
-        /*require ROOT.'/core/Autoloader.php';
-        core\Autoloader::register();*/
     }
    
    

@@ -15,7 +15,7 @@ namespace App;
  */
 class Config {
     /**
-     * tableau contenant les parametreq du site
+     * tableau contenant les parametres du site
      * @var type array
      */
     private $settings = [];

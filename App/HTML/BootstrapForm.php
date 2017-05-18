@@ -18,19 +18,25 @@ class BootstrapForm extends Form
     }
     /**
      * crée un champ du formulaire (input text, input password, textarea)
+     * accepte en tableau d'option : 
+     * key = 'type' => 
+     * value = type au meme format que l'html (par defaut vaut text)
      * @param type $name string 
      * @param type $label string
-     * @param type $options array
+     * @param type $options array (optionnal)
      * @return type string
      */
     public function input($name, $label, $options = []) 
     {
+        // par défaut le type est text
         $type = 'text';
+        // teste si un valeur pour le type est passé en parametre
         if (isset($options['type'])){
             $type = $options['type'];
         } 
+        // crée le label
         $label = '<label for="'.$name.'">'.$label.' : </label>';
-        
+        // test si le type est textarea
         if ($type === 'textarea') {
             $input = '<textarea name="'.$name.'" id="'.$name.'" class ="form-control" rows ="15">'.$this->getValue($name).'</textarea>' ;
         }
@@ -68,7 +74,7 @@ class BootstrapForm extends Form
      */
     public function submit($nom = 'Envoyer') 
     {
-        return $this->surround('<button type="submit" class="btn btn-primary">'.$nom.'</button>');
+        return $this->surround('<button type="submit" class="btn btn-success pull-right">'.$nom.'</button>');
     }
 
 }

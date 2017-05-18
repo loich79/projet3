@@ -1,4 +1,5 @@
-<a href="?page=admin.comments.index" class="btn"> retour </a>
+<a href="?page=admin.comments.index" class="btn btn-primary"> retour </a>
+<!-- affichage d'un message d'erreur si besoin -->
 <?php
 if($error) :
 ?>

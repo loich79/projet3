@@ -1,49 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="fr">
+
+<head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <!-- empeche l'indexation par les moteurs de recherche-->
+    <meta name="robots" content="noindex,nofollow"/>
 
     <title><?= App::getInstance()->getTitle() ?></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/css/style.css" rel="stylesheet">
 
-    <!-- Script js de jquery et bootstrap-->
+    <!-- Theme CSS -->
+    <link href="../Public/css/style.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- jquery and bootstrap script -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-    <!-- Script js pour l'editeur de texte WYSIWYG-->
+    <!-- WYSIWYG editor script-->
     <script src="../Public/js/tinymce/tinymce.min.js"></script>
     <script src="../public/js/ckeditor/ckeditor.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="../public/index.php">Jean Forteroche</a>
-        </div>        
-      </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.php">Jean Forteroche</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.php">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="#">A propos</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <?php
+                    // affichage différencier si une session existe ou non
+                    if(isset($_SESSION['auth'])) {
+                    ?>
+                    <li>
+                        <a href="?page=admin.posts.index">Administration</a>
+                    </li>
+                    <li>
+                        <a href="?page=users.logout">Deconnexion</a>
+                    </li>
+                    <?php
+                    } else {
+                    ?>
+                    <li>
+                        <a href="?page=admin.posts.index">Administration</a>
+                    </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
     </nav>
 
-    <div class="container" id="main-container">
+    <!-- Page Header -->
+    <!-- free background image from www.pexels.com -->
+    <header class="intro-header" style="background-image: url('img/template-background.jpeg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1><?= App::getInstance()->getPageTitle() ?></h1>
+                        <hr class="small">
+                        <span class="subheading"><?= App::getInstance()->getPageSubtitle() ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
         <?= $content; ?>
-    </div><!-- /.container -->
-    <?php
-    require 'footer.php';
-    ?>    
-  </body>
+        <!-- Pager -->
+        <!--<ul class="pager">
+            <li class="next">
+                <a href="#">Articles précedents &rarr;</a>
+            </li>
+        </ul>-->
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted"><a href="#">Mentions légales</a> - Copyright &copy; Jean Forteroche 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
 </html>

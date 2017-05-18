@@ -1,10 +1,11 @@
-<a href="?page=admin.categories.index" class="btn"> retour </a>
+<a href="?page=admin.categories.index" class="btn btn-primary"> retour </a>
+<!-- affichage d'un message d'erreur si nécessaire -->
 <?php if($error) : ?>
     <div class="alert alert-danger">
         Erreur lors de la sauvegarde ! 
     </div>
 <?php endif; ?>
-<h1>Ajouter une catégorie</h1>
+<!-- affichage du formulaire pour l'ajout d'une catégorie -->
 <form method="POST">
     <?= $form->input('title', 'Titre de la catégorie'); ?>
     <?= $form->submit('Sauvegarder') ?>

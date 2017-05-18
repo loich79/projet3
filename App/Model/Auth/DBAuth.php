@@ -35,7 +35,7 @@ class DBAuth {
     }
 
     /**
-     * gere la connexion de l'utilisateur 
+     * verifie si les identifiants passé en parametre permettent de se connecter 
      * @param type $username string
      * @param type $password string
      * @return boolean 
@@ -53,7 +53,7 @@ class DBAuth {
         
     }
     /**
-     * test si une session existe
+     * teste si une session existe
      * @return type boolean
      */
     public function logged()

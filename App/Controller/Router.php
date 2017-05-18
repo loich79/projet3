@@ -9,7 +9,7 @@ namespace App\Controller;
  */
 class Router {
     /**
-     * gerer l'appel des controlleurs et de leurs fonctions selon la page demandée
+     * gere l'appel des controlleurs et de leurs fonctions selon la page demandée
      * @param type $page string
      */
     public static function route($page)

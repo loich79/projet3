@@ -1,19 +1,17 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Model\Entity;
 
 /**
  * Description of CommentsEntity
- *
+ * classe permettant de gérer l'affichage des commentaires
  * @author loich
  */
 class CommentsEntity extends Entity {
+    /**
+     * crée le nom du tableau d'enfant pour une commentaire
+     * @param type $id 
+     * @return type string
+     */
     public function arrayChild($id)
     {
         return $name = 'ChildOfComment'.$id;

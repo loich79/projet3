@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Controller\Admin;
 
 use \App;
@@ -21,7 +14,7 @@ class AdminController extends \App\Controller\Controller{
      * initialise la valeur template avec le nom de la page servant de template pour l'administration
      * @var type  string
      */
-    protected $template = "default"; 
+    protected $template = "default_admin"; 
     /**
      * contructeur pour le controleur générique pour l'administration
      */

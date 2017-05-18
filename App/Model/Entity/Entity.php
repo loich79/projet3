@@ -7,7 +7,7 @@ namespace App\Model\Entity;
  */
 class Entity {
     /**
-     * fonction magique permettant l'appel de fonction get si la fonction n'est pas défini (ex url)
+     * fonction "magique" permettant l'appel de fonction get si la fonction n'est pas défini (ex url)
      * @param type $name nom de la fonction appellée (ex : url)
      * @return type fonction appellée (ex : getUrl() )
      */

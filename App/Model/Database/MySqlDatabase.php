@@ -73,7 +73,7 @@ class MySqlDatabase extends Database{
      * execute une requete SQL
      * @param type $statement string
      * @param type $className string
-     * @param type $one bool
+     * @param type $one bool 
      * @return type array
      */
     public function query($statement,$className = null, $one = false)
@@ -85,11 +85,13 @@ class MySqlDatabase extends Database{
                 strpos($statement, 'DELETE') === 0){
             return $req;
         }
+        // determine le type d'objet retourné
         if($className === null) {
             $req->setFetchMode(PDO::FETCH_OBJ);
         } else {
             $req->setFetchMode(PDO::FETCH_CLASS, $className);
         }
+        // détermine le type de retour selon le parametre one 
         if($one) {
             $datas = $req->fetch();
         } else {
@@ -98,7 +100,7 @@ class MySqlDatabase extends Database{
         return $datas;
     }
     /**
-     * prépare et execute
+     * prépare et execute une requete sql
      * @param type $statement string
      * @param type $attributes array
      * @param type $className string
@@ -115,11 +117,13 @@ class MySqlDatabase extends Database{
                 strpos($statement, 'DELETE') === 0){
             return $res;
         }
+        // determine le type d'objet retourné
         if($className === null) {
             $req->setFetchMode(PDO::FETCH_OBJ);
         } else {
             $req->setFetchMode(PDO::FETCH_CLASS, $className);
         }
+        // détermine le type de retour selon le parametre one 
         if($one) {
             $datas = $req->fetch();
         } else {

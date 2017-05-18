@@ -1,19 +1,16 @@
-<a href="?page=admin.post.index" class="btn"> retour </a>
+<a href="?page=admin.post.index" class="btn btn-primary"> retour </a>
+<!-- affichage d'un message d'erreur si besoin-->
 <?php if($error) : ?>
     <div class="alert alert-danger">
         Erreur lors de la sauvegarde ! 
     </div>
 <?php endif; ?>
-<h1>Ajouter un article</h1>
+<!-- affichage d'un formulaire pour ajouter un article -->
 <form method="POST">
     <?= $form->input('title', 'Titre de l\'article'); ?>
     <?= $form->input('content', 'contenu',['type' => 'textarea']) ?>
+    <!-- démarre le script pour afficher l'éditeur de texte TinyMCE -->
     <script>tinymce.init({ selector:'textarea', language: 'fr_FR' });</script>
-    <!--<script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace( 'content' );
-    </script>-->
     <?= $form-> select('category_id', 'Catégories', $categories); ?>
     <?= $form->submit('Sauvegarder') ?>
 </form>
