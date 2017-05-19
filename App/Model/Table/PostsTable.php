@@ -11,11 +11,26 @@ namespace App\Model\Table;
 class PostsTable extends Table{
 
     /**
-     * Récupère les derniers articles
-     * @param type $nbArticles (par defaut = 5)
+     * Récupère tout les articles triés du plus recent au plus ancien
      * @return array
      */
-    public function last($nbArticles = 25)
+    public function last()
+    {
+        return $this->query('SELECT posts.id, posts.title,'
+                . 'posts.content, categories.title AS categorie, posts.category_id,'
+                . 'DATE_FORMAT(posts.publication_date, \'%d/%m/%Y à %H:%i\') AS date '
+                . 'FROM posts '
+                . 'LEFT JOIN categories ON category_id = categories.id '
+                . 'ORDER by posts.publication_date DESC');       
+    }
+    /**
+     * recupere les articles triés du plus en recent au plus ancien 
+     * a partir de la position du premier article passé en paramètre
+     * jusqu'au nombre max d'articles par page 
+     * @param type $firstPost string
+     * @return array
+     */
+    public function limitedList($firstPost)
     {
         return $this->query('SELECT posts.id, posts.title,'
                 . 'posts.content, categories.title AS categorie, posts.category_id,'
@@ -23,8 +38,7 @@ class PostsTable extends Table{
                 . 'FROM posts '
                 . 'LEFT JOIN categories ON category_id = categories.id '
                 . 'ORDER by posts.publication_date DESC '
-                . 'LIMIT 0, '. $nbArticles);
-        
+                . 'LIMIT '.$firstPost.', '.NB_POSTS_PER_PAGE );      
     }
     /**
      * récupère l'article correspondant à l'id passé en parametre
@@ -59,5 +73,14 @@ class PostsTable extends Table{
                 . 'WHERE posts.category_id = ? '
                 . 'ORDER BY publication_date DESC LIMIT 0, ' . $nbArticles, 
                 array((int)$idCategorie));
+    }
+    /**
+     * retourne le nombre total d'articles
+     * @return type object
+     */
+    public function countPosts() {
+        $res = $this->query('SELECT COUNT(id) as nbPosts FROM posts');
+        // retourne uniquement la valeur de nbPosts
+        return $res[0]->nbPosts;
     }
 }

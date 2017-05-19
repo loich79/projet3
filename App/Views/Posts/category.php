@@ -1,6 +1,6 @@
 <div class="row">
     <!-- affichage de la liste des articles -->
-    <div class="col-md-8 bloc">
+    <div class="col-sm-offset-1 col-md-8 bloc">
         <?php foreach ($posts as $post): ?>
         <h2><a href="<?= $post->url; ?>"><?= $post->title ?></a></h2>
         <p>Publié le <?= $post->date ?></p>

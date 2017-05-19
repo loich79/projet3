@@ -25,7 +25,7 @@ class CommentsTable  extends Table{
      */
     public function allForPost($postId)
     {
-        return $this->query("SELECT * FROM  {$this->table} WHERE post_id =  {$postId} ORDER BY id" );
+        return $this->query("SELECT `id`, `authorname`, `comment`, `email`, `post_id`, `parent_id`, `level`, `flag`, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i') AS date FROM  {$this->table} WHERE post_id={$postId} ORDER BY id" );
     }
     /**
      * retourne le nombre de commentaires ayant été signalé

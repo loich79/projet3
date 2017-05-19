@@ -28,7 +28,7 @@ class Autoloader
     {
         if (strpos($class, __NAMESPACE__.'\\') === 0) {
             $classPath = str_replace(__NAMESPACE__.'\\', '', $class);
-            $className = str_replace('/', '\\', $classPath);
+            $className = str_replace('\\', '/', $classPath);
             require ROOT.'/App/'.$className.'.php';
         }
     }

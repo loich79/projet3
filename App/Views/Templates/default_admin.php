@@ -12,6 +12,10 @@
     <meta name="robots" content="noindex,nofollow"/>
     
     <title><?= App::getInstance()->getTitle() ?></title>
+    
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/favicon/favicon-16x16.png" sizes="16x16" />
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -35,8 +39,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
     <!-- WYSIWYG editor script-->
-    <script src="../Public/js/tinymce/tinymce.min.js"></script>
-    <script src="../public/js/ckeditor/ckeditor.js"></script>
+    <script src="js/tinymce/tinymce.min.js"></script>
 
 </head>
 
@@ -117,7 +120,7 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container-fluid">
         <?= $content; ?>
     </div>
 

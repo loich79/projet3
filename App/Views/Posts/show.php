@@ -1,9 +1,7 @@
 <div class="row">
     <!-- affichage de la liste des articles -->
-    <div class="col-sm-8 bloc">
+    <div class="col-sm-offset-1 col-sm-7">
         <div class="row">
-            <p><em><?= $post->categorie ?></em></p>
-            <p>Publié le <?= $post->date ?></p>
             <p><?= $post->content ?></p>
         </div>
         <div class="row">
@@ -14,7 +12,7 @@
         </div>
     </div>
     <!-- affichage de la liste des catégories -->
-    <div class="col-sm-offset-1 col-sm-3 bloc">
+    <div class="col-sm-offset-1 col-sm-3">
         <h2>Catégories</h2>
         <ul class="list-unstyled">
             <?php foreach ($categoriesList as $categories): ?>

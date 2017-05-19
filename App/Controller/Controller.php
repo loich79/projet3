@@ -23,7 +23,7 @@ class Controller {
      */
     public function __construct()
     {
-        $this->viewPath = ROOT . '/app/views/';
+        $this->viewPath = ROOT . '/App/Views/';
     }
     /**
      * gérer l'appel de l'afficheur correspondant a la page demandée via $view

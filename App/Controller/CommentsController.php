@@ -123,7 +123,7 @@ class CommentsController extends Controller {
             $arrayOfArrayOfChild[$this->arrayChild($parent_id)] = ${$this->arrayChild($parent_id)};
         }
         // génère l'affichage des commentaire correspondant a l'article demandé
-        $this->render('posts.comments', compact("message", "comments", "arrayOfArrayOfChild", "postId"));
+        $this->render('Posts.comments', compact("message", "comments", "arrayOfArrayOfChild", "postId"));
     }
     /**
      * gère la fonction de signalement

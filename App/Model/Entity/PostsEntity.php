@@ -24,7 +24,7 @@ class PostsEntity extends Entity{
     public function getExtract()
     {
         $html = '<p>' . substr($this->content, 0, 350) . '...</p>';
-        $html .= '<p><a class="btn btn-info" href="' . $this->getUrl() . '">Voir la suite</a></p>';
+        $html .= '<p>&nbsp <a class="btn btn-primary pull-right" href="' . $this->getUrl() . '">Voir la suite</a></p>';
         return $html;
     }
 }

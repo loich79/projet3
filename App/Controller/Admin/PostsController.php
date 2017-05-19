@@ -35,7 +35,7 @@ class PostsController extends AdminController{
         // récupère tous les articles et les stocke dans un tableau pour être transmis à l'afficheur
         $posts = $this->Posts->all();
         // génere l'affichage de la page d'accueil de l'administration des articles
-        $this->render('admin.posts.index', compact('posts'));
+        $this->render('Admin.Posts.index', compact('posts'));
    }
    /**
     * controleur pour la page edit de l'administration des articles
@@ -73,7 +73,7 @@ class PostsController extends AdminController{
         // initialise un formulaire contenant les valeurs de l'article
         $form = new BootstrapForm($post);
         // génere l'affichage de la page d'édition d'un article
-        $this->render('admin.posts.edit', compact('post', 'categories', 'res', 'form'));
+        $this->render('Admin.Posts.edit', compact('post', 'categories', 'res', 'form'));
    }
    /**
     * controleur pour la page add de l'administration des articles
@@ -117,7 +117,7 @@ class PostsController extends AdminController{
         // initialise un formulaire permettant de créer un article
         $form = new BootstrapForm($_POST);
         // génere l'affichage de la page d'ajout d'un article
-        $this->render('admin.posts.add', compact('error', 'categories', 'form'));
+        $this->render('Admin.Posts.add', compact('error', 'categories', 'form'));
     }
     /**
      * controleur pour l'action supprimer depuis la page d'accueil de l'administration des articles
@@ -139,7 +139,7 @@ class PostsController extends AdminController{
                 $error = true;
             }
             // génere l'affichage de la page d'erreur de supression d'un article
-            $this->render('admin.posts.delete', compact('error'));
+            $this->render('Admin.Posts.delete', compact('error'));
         }
     }
 }

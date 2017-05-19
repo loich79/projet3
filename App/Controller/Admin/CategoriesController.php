@@ -33,7 +33,7 @@ class CategoriesController  extends AdminController{
         // récupère toutes les catégories et les stocke dans un tableau pour être transmis à l'afficheur
         $categories = $this->Categories->all();
         // génere l'affichage de la page d'accueil de l'administration des catégories
-        $this->render('admin.categories.index', compact('categories'));
+        $this->render('Admin.Categories.index', compact('categories'));
    }
    /**
     * controleur pour la page edit de l'administration des articles
@@ -67,7 +67,7 @@ class CategoriesController  extends AdminController{
         // initialise un formulaire contenant les valeurs de la catégorie
         $form = new BootstrapForm($categorie);
         // génere l'affichage de la page d'édition d'une catégorie
-        $this->render('admin.categories.edit', compact('categorie', 'res', 'form'));
+        $this->render('Admin.Categories.edit', compact('categorie', 'res', 'form'));
    }
    /**
     * controleur pour la page add de l'administration des articles
@@ -87,7 +87,7 @@ class CategoriesController  extends AdminController{
                 // teste la valeur de res est vraie
                 if ($res) {
                     // redirige vers la page d'accueil de l'administration des catégories
-                    header('location:?page=admin.categories.index');
+                    header('location:?page=Admin.Categories.index');
                 } else {
                     // modifie la variable error pour indiquer une erreur
                     $error = true; 
@@ -106,7 +106,7 @@ class CategoriesController  extends AdminController{
         // initialise un formulaire permettant de créer une catégorie
         $form = new BootstrapForm($_POST);
         // génere l'affichage de la page d'ajout d'une catégorie
-        $this->render('admin.categories.add', compact('error', 'form'));
+        $this->render('Admin.Categories.add', compact('error', 'form'));
     }
     /**
      * controleur pour l'action supprimer depuis la page d'accueil de l'administration des catégories
@@ -129,6 +129,6 @@ class CategoriesController  extends AdminController{
             }
         }
         // génere l'affichage de la page d'erreur de supression d'une catégorie
-        $this->render('admin.categories.delete', compact('error'));
+        $this->render('Admin.Categories.delete', compact('error'));
     }
 }

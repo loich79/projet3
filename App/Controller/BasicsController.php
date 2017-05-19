@@ -4,49 +4,45 @@ use \App;
 
 /**
  * Description of PostController
- * controleur des articles
+ * controleur des pages basique du site (about, contact et mentions légales
  * @author loich
  */
-class PostsController extends Controller{
+class BasicsController extends Controller{
     /**
-     * contructeur pour le controleur des articles
+     * controleur pour la page a propos
      */
-    public function __construct() {
-        // appelle le contructeur du parent Controller
-        parent::__construct();
-        // génère le modele pour l'interface avec la table posts
-        $this->loadModel('Posts');
-        // génère le modele pour l'interface avec la table categories
-        $this->loadModel('Categories');
+    public function about()
+    {
+        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
+        App::getInstance()->setTitle("A propos");
+        App::getInstance()->setPageTitle("Jean Forteroche");
+        App::getInstance()->setPageSubtitle('A propos');
+        // génère l'affichage de la page a propos
+        $this-> render('Basics.about');
     }
     /**
-     * controleur pour la page d'accueil du site
+     * controleur pour la page contact
      */
-    public function index()
+    public function contact()
     {
-        // pagination
-        // récupère et stocke le nb total d'article
-        $countPosts = $this->Posts->countPosts();
-        // détermine le nombre de page
-        $nbPages = ceil($countPosts/NB_POSTS_PER_PAGE);
-        // teste le paramètre passé en get (isset et compris entre 0 et nombre de page)
-        if (isset($_GET['p']) && $_GET['p']>0 && $_GET['p']<=NB_POSTS_PER_PAGE) {
-            // définit le numéro de la page actuelle
-            $currentPage = $_GET['p'];
-        } else {
-            // définit le numéro de la page actuelle à 1 
-            $currentPage = 1;
-        }
-        // définit la position du premier élément = (numéro page demandé-1)*NB_POSTS_PER_PAGE
-        $firstPost = ($currentPage-1)*NB_POSTS_PER_PAGE;
-        // récupère les articles de la liste limitée et les stocke dans un tableau pour être transmis à l'afficheur       
-        $posts = $this->Posts->limitedList($firstPost); 
-        // récupère tous les derniers articles et les stocke dans un tableau pour être transmis à l'afficheur
-        //$posts = $this->Posts->last();
-        // récupère la liste des catégories et la stocke dans un tableau pour être transmis à l'afficheur
-        $categoriesList = $this->Categories->all();
-        // génère l'affichage de la page d'accueil
-        $this-> render('Posts.index', compact("posts","categoriesList", "nbPages", "currentPage"));
+        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
+        App::getInstance()->setTitle("Contact");
+        App::getInstance()->setPageTitle("Jean Forteroche");
+        App::getInstance()->setPageSubtitle('Contact');
+        // génère l'affichage de la page a propos
+        $this-> render('Basics.contact');
+    }
+    /**
+     * controleur pour la page mentions légales
+     */
+    public function legal()
+    {
+        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
+        App::getInstance()->setTitle("Mentions legales");
+        App::getInstance()->setPageTitle("Jean Forteroche");
+        App::getInstance()->setPageSubtitle('Mentions legales');
+        // génère l'affichage de la page a propos
+        $this-> render('Basics.legal');
     }
     /**
      * controleur pour la page d'un article

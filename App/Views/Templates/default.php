@@ -12,12 +12,16 @@
     <meta name="robots" content="noindex,nofollow"/>
 
     <title><?= App::getInstance()->getTitle() ?></title>
+    
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/favicon/favicon-16x16.png" sizes="16x16" />
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="../Public/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -35,8 +39,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
     <!-- WYSIWYG editor script-->
-    <script src="../Public/js/tinymce/tinymce.min.js"></script>
-    <script src="../public/js/ckeditor/ckeditor.js"></script>
+    <script src="js/tinymce/tinymce.min.js"></script>
 
 </head>
 
@@ -61,10 +64,10 @@
                         <a href="index.php">Accueil</a>
                     </li>
                     <li>
-                        <a href="#">A propos</a>
+                        <a href="index.php?page=about">A propos</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="index.php?page=contact">Contact</a>
                     </li>
                     <?php
                     // affichage différencier si une session existe ou non
@@ -109,14 +112,8 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container-fluid">
         <?= $content; ?>
-        <!-- Pager -->
-        <!--<ul class="pager">
-            <li class="next">
-                <a href="#">Articles précedents &rarr;</a>
-            </li>
-        </ul>-->
     </div>
 
     <hr>
@@ -152,7 +149,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted"><a href="#">Mentions légales</a> - Copyright &copy; Jean Forteroche 2017</p>
+                    <p class="copyright text-muted"><a href="index.php?page=legal">Mentions légales</a> - Copyright &copy; Jean Forteroche 2017</p>
                 </div>
             </div>
         </div>

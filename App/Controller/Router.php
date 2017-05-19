@@ -65,6 +65,15 @@ class Router {
         }  elseif ($page === 'admin.comments.unflag') {
             $controller = new \App\Controller\Admin\CommentsController();
             $controller->unflag();
+        }  elseif ($page === 'about') {
+            $controller = new \App\Controller\BasicsController();
+            $controller->about();
+        }  elseif ($page === 'contact') {
+            $controller = new \App\Controller\BasicsController();
+            $controller->contact();
+        }  elseif ($page === 'legal') {
+            $controller = new \App\Controller\BasicsController();
+            $controller->legal();
         }
     }
 }

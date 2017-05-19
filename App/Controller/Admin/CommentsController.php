@@ -35,7 +35,7 @@ class CommentsController extends AdminController{
         // récupère tous les commentaires et les stocke dans un tableau pour être transmis à l'afficheur
         $comments = $this->Comments->all();
         // génere l'affichage de la page de modération des commentaires
-        $this->render('admin.comments.index', compact('comments', 'countCommentsFlagged'));
+        $this->render('Admin.Comments.index', compact('comments', 'countCommentsFlagged'));
     }
     /**
      * supprime un commentaire et ses réponses si il y en a 
@@ -100,7 +100,7 @@ class CommentsController extends AdminController{
             $error = true;
         }
         // génere l'affichage de la page erreur pour la suppression des commentaires
-        $this->render('admin.comments.delete', compact('error'));
+        $this->render('Admin.Comments.delete', compact('error'));
     }
     /**
      * retire les signalements
@@ -123,6 +123,6 @@ class CommentsController extends AdminController{
             }
         }
         // génere l'affichage de la page erreur pour le retrait du signalement
-        $this->render('admin.comments.unflag', compact('error'));
+        $this->render('Admin.Comments.unflag', compact('error'));
     }
 }

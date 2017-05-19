@@ -32,7 +32,7 @@ function showComment($comment, $compteur, $postId)
     <div class="panel panel-default">
         <div class="panel-heading">
             <p>
-                <?= htmlspecialchars($comment->authorname) ?> - <?= $comment->comment_date  ?>
+                <?= htmlspecialchars($comment->authorname) ?> - <?= $comment->date  ?>
                 <a href="index.php?page=posts.flag&id=<?= $comment->id ?>" class="pull-right">signaler</a>
             </p>
         </div>

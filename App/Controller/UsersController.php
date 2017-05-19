@@ -33,7 +33,7 @@ class UsersController extends Controller {
         // initialise un formulaire permettant de se connecter
         $form = new BootstrapForm($_POST);
         // génere l'affichage de la page de connexion
-        $this->render('users.login', compact('form','errors'));
+        $this->render('Users.login', compact('form','errors'));
     }
     /**
      * controlleur pour la deconnexion de l'administration
