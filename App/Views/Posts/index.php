@@ -26,7 +26,9 @@ if($nbPages>1) { ?>
 <div class="row">
     <nav aria-label="Page navigation">
       <ul class="pager">
-        <?php if($currentPage == 1) {?>
+        <?php
+        // teste si la page affiché est la première page pour desactiver le bouton precedent
+        if($currentPage == 1) {?>
             <li class="disabled">
               <a href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -40,7 +42,9 @@ if($nbPages>1) { ?>
             </li>
         <?php } ?>
         <?php 
+        // créer l'affichage des boutons numérotés en fonction du nombre de page
         for ($i=1;$i<=$nbPages;$i++) { 
+            // teste si le numéro du bouton correspond a la page courante pour desactiver le bouton numéroté
             if($i == $currentPage) { ?>
             <li class="disabled">
                 <a href="index.php?p=<?= $i ?>"><?= $i ?><span class="sr-only">(current)</span></a>
@@ -53,7 +57,9 @@ if($nbPages>1) { ?>
         <?php    
             }        
         } ?> 
-        <?php if($currentPage == $nbPages) {?>
+        <?php 
+        // teste si la page affiché est la dernière page pour desactiver le bouton suivant
+        if($currentPage == $nbPages) {?>
             <li class="disabled">
               <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>

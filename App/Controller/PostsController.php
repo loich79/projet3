@@ -41,8 +41,6 @@ class PostsController extends Controller{
         $firstPost = ($currentPage-1)*NB_POSTS_PER_PAGE;
         // récupère les articles de la liste limitée et les stocke dans un tableau pour être transmis à l'afficheur       
         $posts = $this->Posts->limitedList($firstPost); 
-        // récupère tous les derniers articles et les stocke dans un tableau pour être transmis à l'afficheur
-        //$posts = $this->Posts->last();
         // récupère la liste des catégories et la stocke dans un tableau pour être transmis à l'afficheur
         $categoriesList = $this->Categories->all();
         // génère l'affichage de la page d'accueil
@@ -87,11 +85,26 @@ class PostsController extends Controller{
         App::getInstance()->setTitle($category->title);
         App::getInstance()->setPageTitle('Catégorie : '.$category->title);
         App::getInstance()->setPageSubtitle('');
-        // récupère la liste des articles pour la catégorie demandée et la stocke dans un tableau pour être transmis à l'afficheur
-        $posts = $this->Posts->lastByCategory($_GET['id']);
+        // pagination
+        // récupère et stocke le nb total d'article
+        $countPosts = $this->Posts->countPostsByCategory($_GET['id']);
+        // détermine le nombre de page
+        $nbPages = ceil($countPosts/NB_POSTS_PER_PAGE);
+        // teste le paramètre passé en get (isset et compris entre 0 et nombre de page)
+        if (isset($_GET['p']) && $_GET['p']>0 && $_GET['p']<=NB_POSTS_PER_PAGE) {
+            // définit le numéro de la page actuelle
+            $currentPage = $_GET['p'];
+        } else {
+            // définit le numéro de la page actuelle à 1 
+            $currentPage = 1;
+        }
+        // définit la position du premier élément = (numéro page demandé-1)*NB_POSTS_PER_PAGE
+        $firstPost = ($currentPage-1)*NB_POSTS_PER_PAGE;
+        // récupère les articles de la liste limitée et les stocke dans un tableau pour être transmis à l'afficheur       
+        $posts = $this->Posts->limitedListByCategory($firstPost, $_GET['id']); 
          // récupère la liste des catégories et la stocke dans un tableau pour être transmis à l'afficheur
         $categoriesList = $this->Categories->all();
         // génère l'affichage de la page de la liste des articles selon la catégorie
-        $this-> render('Posts.category', compact("posts","categoriesList", "category"));
+        $this-> render('Posts.category', compact("posts","categoriesList", "category", "nbPages", "currentPage"));
     }
 }

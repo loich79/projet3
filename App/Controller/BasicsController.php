@@ -38,56 +38,10 @@ class BasicsController extends Controller{
     public function legal()
     {
         // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
-        App::getInstance()->setTitle("Mentions legales");
+        App::getInstance()->setTitle("Mentions légales");
         App::getInstance()->setPageTitle("Jean Forteroche");
-        App::getInstance()->setPageSubtitle('Mentions legales');
+        App::getInstance()->setPageSubtitle('Mentions légales');
         // génère l'affichage de la page a propos
         $this-> render('Basics.legal');
-    }
-    /**
-     * controleur pour la page d'un article
-     */
-    public function show()
-    {
-        //crée le controlleur des commentaires
-        $controlComment = new \App\Controller\CommentsController();
-        // récupère l'article demandé et le stocke dans un tableau pour être transmis à l'afficheur
-        $post = $this->Posts->find($_GET['id']);
-        // test si l'article n'existe pas
-        if($post === false) {
-            // redirige vers la page 404
-            $this->notFound();
-        }
-        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
-        App::getInstance()->setTitle($post->title);
-        App::getInstance()->setPageTitle($post->title);
-        App::getInstance()->setPageSubtitle('Catégorie : ' . $post->categorie . ' - Publié le ' . $post->date);
-        // récupère la liste des catégories et la stocke dans un tableau pour être transmis à l'afficheur
-        $categoriesList = $this->Categories->all();
-        // génère l'affichage de la page pour un article
-        $this-> render('Posts.show', compact("post","categoriesList","controlComment"));
-    }
-    /**
-     * controlleur pour la page de la liste des articles selon la catégorie
-     */
-    public function category()
-    {
-        // génere le contenu des pages catégories
-        $category = $this->Categories->find($_GET['id']);
-        // test si l'article n'existe pas
-        if($category === false) {
-            // redirige vers la page 404
-            $this->notFound();
-        }
-        // modifie le titre de la page, ainsi que le titre et le sous titre de la bannière
-        App::getInstance()->setTitle($category->title);
-        App::getInstance()->setPageTitle('Catégorie : '.$category->title);
-        App::getInstance()->setPageSubtitle('');
-        // récupère la liste des articles pour la catégorie demandée et la stocke dans un tableau pour être transmis à l'afficheur
-        $posts = $this->Posts->lastByCategory($_GET['id']);
-         // récupère la liste des catégories et la stocke dans un tableau pour être transmis à l'afficheur
-        $categoriesList = $this->Categories->all();
-        // génère l'affichage de la page de la liste des articles selon la catégorie
-        $this-> render('Posts.category', compact("posts","categoriesList", "category"));
     }
 }

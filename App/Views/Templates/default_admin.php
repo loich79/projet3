@@ -64,10 +64,10 @@
                         <a href="index.php">Accueil</a>
                     </li>
                     <li>
-                        <a href="#">A propos</a>
+                        <a href="index.php?page=about">A propos</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="index.php?page=contact">Contact</a>
                     </li>
                     <?php
                     // affichage différencier si une session existe ou non
@@ -157,7 +157,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted"><a href="#">Mentions légales</a> - Copyright &copy; Jean Forteroche 2017</p>
+                    <p class="copyright text-muted"><a href="index.php?page=legal">Mentions légales</a> - Copyright &copy; Jean Forteroche 2017</p>
                 </div>
             </div>
         </div>
