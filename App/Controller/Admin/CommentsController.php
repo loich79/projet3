@@ -38,6 +38,30 @@ class CommentsController extends AdminController{
         $this->render('Admin.Comments.index', compact('comments', 'countCommentsFlagged'));
     }
     /**
+     * methode récurcive pour créer le tableau de commentaires a supprimer (commentaire demandé et ses réponses éventuelles)
+     * @param type $postId
+     * @return type
+     */
+    protected function findCommentsToDelete($postId) 
+    {
+        // récupère le commentaire qu'on doit supprimer
+        $commentSelected = $this->Comments->find($postId);
+        // ajoute le commentaire initial au tableau de commentaire à supprimer
+        $CommentsToDelete[] = $commentSelected;
+        // teste si le level est inférieur ou égal à niveau max de reponses autorisé
+        if($commentSelected->level <= MAX_COMMENT_LEVEL) {
+            // recherche les enfants de $commentSelected
+            $CommentsChild1 = $this->Comments->findChild($postId);
+            //parcours le tableau des enfants de $commentSelected
+            foreach ($CommentsChild1 as $child1) {
+                // ajoute le tableau retourner par la methode au tableau de commentaire à supprimer
+                $CommentsToDelete = array_merge($CommentsToDelete, $this->findCommentsToDelete($child1->id));
+            }
+        }
+        // retourne le tableau contenant les commentaires a effacer
+        return $CommentsToDelete;
+    }
+    /**
      * supprime un commentaire et ses réponses si il y en a 
      */
     public function delete()
@@ -46,41 +70,8 @@ class CommentsController extends AdminController{
         $error = false;
         // remplit le tableau de commentaires a supprimer
         if(!empty($_POST )) {
-            // récupère le commentaire qu'on doit supprimer
-            $commentSelected = $this->Comments->find($_POST['id']);
-            // ajoute le commentaire initial au tableau de commentaire à supprimer
-            $CommentsToDelete[] = $commentSelected;
-            // teste si le level est inférieur ou égal à niveau max de reponses autorisé
-            if($commentSelected->level <= MAX_COMMENT_LEVEL) {
-                // recherche les enfants de $commentSelected
-                $CommentsChild1 = $this->Comments->findChild($commentSelected->id);
-                //parcours le tableau des enfants de $commentSelected
-                foreach ($CommentsChild1 as $child1) {
-                    // ajoute le commentaire enfant $child1 au tableau de commentaire à supprimer
-                    $CommentsToDelete[] = $child1;
-                    // teste si le level $child1 est inférieur ou égal à niveau max de reponses autorisé
-                    if($child1->level <= MAX_COMMENT_LEVEL) {
-                        // recherche les enfants de $child1
-                        $CommentsChild2 = $this->Comments->findChild($child1->id);
-                        //parcours le tableau des enfants de $child1
-                        foreach ($CommentsChild2 as $child2) {
-                            // ajoute le commentaire enfant $child2 au tableau de commentaire à supprimer
-                            $CommentsToDelete[] = $child2;
-                            // teste si le level de $child2 est inférieur ou égal à niveau max de reponses autorisé
-                            if($child2->level <= MAX_COMMENT_LEVEL) {
-                                // recherche les enfants de $child2
-                                $CommentsChild3 = $this->Comments->findChild($child2->id);
-                                //parcours le tableau des enfants de $child2
-                                foreach ($CommentsChild3 as $child3) {
-                                    // ajoute le commentaire enfant $child3 au tableau de commentaire à supprimer
-                                    $CommentsToDelete[] = $child3;
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-            }
+            // récupère le tableau de commentaires a supprimer (commentaire demandé et ses réponses éventuelles)
+            $CommentsToDelete = $this->findCommentsToDelete($_POST['id']);
             // supprime les commentaires contenu dans le tableau $commentToDelete
             // parcourt le tableau $commentToDelete
             foreach ($CommentsToDelete as $commentToDelete) {

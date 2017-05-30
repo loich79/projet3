@@ -33,7 +33,7 @@ function showComment($comment, $compteur, $postId)
         <div class="panel-heading">
             <p>
                 <?= htmlspecialchars($comment->authorname) ?> - <?= $comment->date  ?>
-                <a href="index.php?page=posts.flag&id=<?= $comment->id ?>" class="pull-right">signaler</a>
+                <a href="index.php?page=posts.flag&id=<?= $comment->id ?>" class="pull-right">Signaler</a>
             </p>
         </div>
         <div class="panel-body">
@@ -62,7 +62,7 @@ function showComment($comment, $compteur, $postId)
                             <input type="email" name="email" id="email" class="form-control" required /> 
                             <label for="comment">Votre commentaire : </label> 
                             <textarea name="comment" id="comment" rows="5" required class="form-control"></textarea> 
-                            <input type="submit" value="Repondre" class="btn btn-primary pull-right"/> 
+                            <input type="submit" value="Répondre" class="btn btn-primary pull-right btn-reponse"/> 
                         </form> 
                     </div> 
                 </div>                
