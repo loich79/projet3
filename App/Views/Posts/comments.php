@@ -7,6 +7,7 @@ function arrayChild($id)
 // fonction récursive permettant d'afficher les réponses a un commentaire et de gérer le décalage 
 function showAllComments($arrayOfArrayOfChild, $comment, $compteur, $postId)
 {
+    // teste si le tableau d'enfant pour le commentaire existe
     if (isset($arrayOfArrayOfChild[arrayChild($comment->id)])) {
         // teste si le niveau du commentaires est inférieur au niveau maximun de réponses autorisé
         if($comment->level <= MAX_COMMENT_LEVEL ) {
